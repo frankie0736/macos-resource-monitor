@@ -1,0 +1,13 @@
+Welcome to Resource Monitor!
+
+This installer will install:
+• Resource Monitor App → /Applications/
+• Backend Service → /usr/local/bin/
+• Auto-start configuration
+
+After installation:
+• Backend service starts automatically on boot
+• App will be added to Login Items
+• Widget appears on your desktop
+
+Click Continue to proceed.

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+    <title>Resource Monitor</title>
+    <welcome file="welcome.txt"/>
+    <options customize="never" require-scripts="false" hostArchitectures="arm64,x86_64"/>
+    <domains enable_anywhere="false" enable_currentUserHome="false" enable_localSystem="true"/>
+    <installation-check script="pm_install_check();"/>
+    <script>
+    function pm_install_check() {
+        if(!(system.compareVersions(system.version.ProductVersion,'12.0') >= 0)) {
+            my.result.title = 'Failure';
+            my.result.message = 'macOS 12.0 or later is required.';
+            my.result.type = 'Fatal';
+            return false;
+        }
+        return true;
+    }
+    </script>
+    <choices-outline>
+        <line choice="default">
+            <line choice="com.fx.resource-monitor.app"/>
+            <line choice="com.fx.resource-monitor.backend"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="com.fx.resource-monitor.app" visible="false">
+        <pkg-ref id="com.fx.resource-monitor.app"/>
+    </choice>
+    <choice id="com.fx.resource-monitor.backend" visible="false">
+        <pkg-ref id="com.fx.resource-monitor.backend"/>
+    </choice>
+    <pkg-ref id="com.fx.resource-monitor.app" version="1.0.0" onConclusion="none">ResourceMonitor-app.pkg</pkg-ref>
+    <pkg-ref id="com.fx.resource-monitor.backend" version="1.0.0" onConclusion="none">ResourceMonitor-backend.pkg</pkg-ref>
+</installer-gui-script>
