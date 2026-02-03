@@ -2,6 +2,9 @@ import AppKit
 import SwiftUI
 
 class FloatingPanel: NSPanel {
+    private var mouseMonitor: Any?
+    private var isMouseInside = false
+
     init(contentRect: NSRect, backing: NSWindow.BackingStoreType = .buffered, defer flag: Bool = false) {
         super.init(contentRect: contentRect, styleMask: [.nonactivatingPanel, .titled, .closable, .fullSizeContentView], backing: backing, defer: flag)
 
@@ -22,7 +25,7 @@ class FloatingPanel: NSPanel {
 
         // Visual effect (dark frosted glass - Matrix style)
         let visualEffect = NSVisualEffectView()
-        visualEffect.material = .dark
+        visualEffect.material = .hudWindow
         visualEffect.state = .active
         visualEffect.blendingMode = .behindWindow
         visualEffect.appearance = NSAppearance(named: .darkAqua)
@@ -34,8 +37,14 @@ class FloatingPanel: NSPanel {
         // Hide window buttons by default
         hideWindowButtons()
 
-        // Track mouse for hover effects
-        setupHoverTracking()
+        // Setup global mouse monitoring for hover
+        setupMouseMonitor()
+    }
+
+    deinit {
+        if let monitor = mouseMonitor {
+            NSEvent.removeMonitor(monitor)
+        }
     }
 
     private func hideWindowButtons() {
@@ -50,17 +59,34 @@ class FloatingPanel: NSPanel {
         standardWindowButton(.zoomButton)?.alphaValue = 1
     }
 
-    private func setupHoverTracking() {
-        let trackingArea = NSTrackingArea(
-            rect: .zero,
-            options: [.mouseEnteredAndExited, .activeAlways, .inVisibleRect],
-            owner: self,
-            userInfo: nil
-        )
-        contentView?.addTrackingArea(trackingArea)
+    private func setupMouseMonitor() {
+        // Global mouse moved monitor to detect hover
+        mouseMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.mouseMoved, .leftMouseDragged]) { [weak self] event in
+            self?.checkMouseLocation()
+        }
+
+        // Also monitor local events
+        NSEvent.addLocalMonitorForEvents(matching: [.mouseMoved, .leftMouseDragged]) { [weak self] event in
+            self?.checkMouseLocation()
+            return event
+        }
     }
 
-    override func mouseEntered(with event: NSEvent) {
+    private func checkMouseLocation() {
+        let mouseLocation = NSEvent.mouseLocation
+        let isInside = frame.contains(mouseLocation)
+
+        if isInside != isMouseInside {
+            isMouseInside = isInside
+            if isInside {
+                handleMouseEntered()
+            } else {
+                handleMouseExited()
+            }
+        }
+    }
+
+    private func handleMouseEntered() {
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.2
             self.animator().alphaValue = 0.98
@@ -68,7 +94,7 @@ class FloatingPanel: NSPanel {
         showWindowButtons()
     }
 
-    override func mouseExited(with event: NSEvent) {
+    private func handleMouseExited() {
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.2
             self.animator().alphaValue = 0.92

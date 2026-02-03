@@ -17,6 +17,7 @@
 		A100000F230A8888001AAAAA /* SystemOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000010230A8888001AAAAA /* SystemOverviewView.swift */; };
 		A1000011230A8888001AAAAA /* ProcessListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000012230A8888001AAAAA /* ProcessListView.swift */; };
 		A1000013230A8888001AAAAA /* AlertBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000014230A8888001AAAAA /* AlertBannerView.swift */; };
+		A1000015230A8888001AAAAA /* DateInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000017230A8888001AAAAA /* DateInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		A1000012230A8888001AAAAA /* ProcessListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessListView.swift; sourceTree = "<group>"; };
 		A1000014230A8888001AAAAA /* AlertBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBannerView.swift; sourceTree = "<group>"; };
 		A1000016230A8888001AAAAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1000017230A8888001AAAAA /* DateInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				A1000010230A8888001AAAAA /* SystemOverviewView.swift */,
 				A1000012230A8888001AAAAA /* ProcessListView.swift */,
 				A1000014230A8888001AAAAA /* AlertBannerView.swift */,
+				A1000017230A8888001AAAAA /* DateInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				A100000F230A8888001AAAAA /* SystemOverviewView.swift in Sources */,
 				A1000011230A8888001AAAAA /* ProcessListView.swift in Sources */,
 				A1000013230A8888001AAAAA /* AlertBannerView.swift in Sources */,
+				A1000015230A8888001AAAAA /* DateInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -39,7 +39,7 @@ struct ProcessRow: View {
     var body: some View {
         HStack(spacing: 4) {
             // Process name
-            Text(process.name.uppercased())
+            Text(process.name)
                 .font(.system(size: 9, weight: .medium, design: .monospaced))
                 .foregroundColor(Color.matrixGreen)
                 .lineLimit(1)

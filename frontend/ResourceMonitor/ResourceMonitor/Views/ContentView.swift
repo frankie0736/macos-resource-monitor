@@ -32,6 +32,11 @@ struct ContentView: View {
                 }
             }
             .frame(maxHeight: .infinity)
+
+            // Date info at bottom
+            DateInfoView()
+                .padding(.horizontal, 10)
+                .padding(.bottom, 6)
         }
         .frame(width: 280, height: 420)
         .background(Color.matrixBg.opacity(0.95))
